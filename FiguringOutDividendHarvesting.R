@@ -95,6 +95,7 @@ SYMBOLS <- SYMBOLS[-grep("wrb-ph",SYMBOLS$Symbol,ignore.case = T),]
 
 PriceInfo <- c()
 THE <- c()
+URLBeginning <- 
 
 for (i in 1:nrow(SYMBOLS)){
   PriceInfo <- getSymbols(SYMBOLS$Symbol[i],auto.assign = F)
