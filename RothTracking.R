@@ -1,6 +1,11 @@
 library(rvest)
 library(gmailr)
 
+rm(list = ls())
+
+if(format(Sys.time(), "%H") == 20 && format(Sys.time(),"%M") %in% c(20:40))
+{
+
 FirstTrustCPST61 <- "https://www.ftportfolios.com/retail/dp/dpsummary.aspx?fundid=16790"
 
 PriceWebsiteCPST61 <- session(FirstTrustCPST61)
@@ -40,18 +45,19 @@ DividendHarvesterSession <- session(FirstTrustCPST61Dist)
 
 
 
-NoClueHowThisWorks <- GuineaPig %>% 
-  html_table()
-
-TEST <- NoClueHowThisWorks[[1]]
-
-FirstDividendPayment <- as.numeric(gsub("[$]","",TEST$X55[1]))
+# NoClueHowThisWorks <- GuineaPig %>% 
+#   html_table()
+# 
+# TEST <- NoClueHowThisWorks[[1]]
+# 
+# FirstDividendPayment <- as.numeric(gsub("[$]","",TEST$X55[1]))
 
 
 
 
 
 gm_auth_configure("606976777155-8q918leqmsjiphi07i2nb4rk34het5q8.apps.googleusercontent.com","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")
+gm_auth(email = "patbackthebackpack@gmail.com")
 
 gm_send_message(
  gm_mime() %>%
@@ -64,3 +70,17 @@ gm_send_message(
 
 # If (weekdays(Sys.Date()) == "Sunday") {
 # } else if (weekdays(Sys.Date()) %in% c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday") {
+
+
+} else {
+  gm_auth_configure("606976777155-8q918leqmsjiphi07i2nb4rk34het5q8.apps.googleusercontent.com","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")
+  gm_auth(email = "patbackthebackpack@gmail.com")
+  
+  gm_send_message(
+    gm_mime() %>%
+      gm_from("patbackthebackpack@gmail.com") %>%
+      gm_to("newestestemail@gmail.com") %>%
+      gm_subject("Ignore me this is the test") %>%
+      gm_text_body("the current time is who cares")
+  )
+}
